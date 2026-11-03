@@ -1,0 +1,31 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Cashier.App/Cashier.App.csproj" />
+    <Project Path="src/Cashier.Core/Cashier.Core.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Cashier.Release110/Cashier.Release110.csproj" />
+    <Project Path="tests/Cashier.InvoiceConservative/Cashier.InvoiceConservative.csproj" />
+    <Project Path="tests/Cashier.MonthlyDebt/Cashier.MonthlyDebt.csproj" />
+    <Project Path="tests/Cashier.MonthlyDebtUi/Cashier.MonthlyDebtUi.csproj" />
+    <Project Path="tests/Cashier.SettlementStatus/Cashier.SettlementStatus.csproj" />
+    <Project Path="tests/Cashier.OpeningBalanceTests/Cashier.OpeningBalanceTests.csproj" />
+    <Project Path="tests/Cashier.OpeningBalanceUiTests/Cashier.OpeningBalanceUiTests.csproj" />
+    <Project Path="tests/Cashier.PartnerCodes/Cashier.PartnerCodes.csproj" />
+    <Project Path="tests/Cashier.PartnerCodesUi/Cashier.PartnerCodesUi.csproj" />
+    <Project Path="tests/Cashier.InvoiceBatch/Cashier.InvoiceBatch.csproj" />
+    <Project Path="tests/Cashier.InvoiceQuickCustomer/Cashier.InvoiceQuickCustomer.csproj" />
+    <Project Path="tests/Cashier.StressCalculation/Cashier.StressCalculation.csproj" />
+    <Project Path="tests/Cashier.StatefulCalculation/Cashier.StatefulCalculation.csproj" />
+    <Project Path="tests/Cashier.PartnerGuard/Cashier.PartnerGuard.csproj" />
+    <Project Path="tests/Cashier.DataExchangeTests/Cashier.DataExchangeTests.csproj" />
+    <Project Path="tests/Cashier.DataExchangeUiTests/Cashier.DataExchangeUiTests.csproj" />
+    <Project Path="tests/Cashier.DeepCalculation/Cashier.DeepCalculation.csproj" />
+    <Project Path="tests/Cashier.AutoTest/Cashier.AutoTest.csproj" />
+    <Project Path="tests/Cashier.AccountDrill/Cashier.AccountDrill.csproj" />
+    <Project Path="tests/Cashier.InvoiceCalc/Cashier.InvoiceCalc.csproj" />
+    <Project Path="tests/Cashier.Regression/Cashier.Regression.csproj" />
+    <Project Path="tests/Cashier.SelfTest/Cashier.SelfTest.csproj" />
+    <Project Path="tests/Cashier.PeriodInvoiceCash/Cashier.PeriodInvoiceCash.csproj" />
+  </Folder>
+</Solution>

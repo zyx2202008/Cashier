@@ -1,0 +1,144 @@
+<Window x:Class="Cashier.App.Views.VoucherWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="单据" Width="720" SizeToContent="Height" MaxHeight="860"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        Background="{StaticResource B.Bg}" FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI">
+  <Grid Margin="16">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <!-- 头部 -->
+    <Border Grid.Row="0" Style="{StaticResource Card}" Padding="16,12">
+      <StackPanel>
+        <StackPanel Orientation="Horizontal">
+          <TextBlock x:Name="TitleText" Text="新增收入" Style="{StaticResource T.H1}"/>
+          <Border x:Name="StatusChip" Style="{StaticResource Chip}" Margin="10,0,0,0" Background="{StaticResource B.BrandSoft}" BorderBrush="#CFE6E2">
+            <TextBlock x:Name="StatusText" Text="新建" FontSize="11" Foreground="{StaticResource B.BrandDark}"/>
+          </Border>
+          <TextBlock x:Name="DocNoText" Text="" Style="{StaticResource T.Hint}" Margin="10,0,0,0" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <!-- 金额 -->
+        <Border x:Name="AmountBox" BorderBrush="#D8E0E9" BorderThickness="1" CornerRadius="8" Background="#FCFDFE"
+                Padding="14,9" Margin="0,12,0,0">
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="¥" FontSize="17" Foreground="{StaticResource B.Ink2}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+            <TextBox Grid.Column="1" x:Name="TxtAmount" FontSize="28" FontWeight="SemiBold" Height="42" BorderThickness="0"
+                     Background="Transparent" VerticalContentAlignment="Center" TextChanged="TxtAmount_TextChanged"
+                     FontFamily="Segoe UI, Microsoft YaHei UI"/>
+            <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+              <TextBlock x:Name="UpperText" Text="" Style="{StaticResource T.Hint}" HorizontalAlignment="Right"/>
+              <TextBlock x:Name="AmountErr" Text="金额必须大于 0" Foreground="{StaticResource B.Danger}" FontSize="11"
+                         HorizontalAlignment="Right" Visibility="Collapsed"/>
+            </StackPanel>
+          </Grid>
+        </Border>
+
+        <!-- 表单 -->
+        <Grid Margin="0,14,0,0">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+
+          <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,10,10">
+            <TextBlock Text="业务日期 *" Style="{StaticResource T.Label}"/>
+            <DatePicker x:Name="DpDate" SelectedDateFormat="Short"/>
+          </StackPanel>
+          <StackPanel Grid.Row="0" Grid.Column="1" x:Name="BoxNature" Margin="0,0,0,10">
+            <TextBlock Text="业务性质 *" Style="{StaticResource T.Label}"/>
+            <ComboBox x:Name="CmbNature" DisplayMemberPath="Name" SelectionChanged="CmbNature_SelectionChanged"/>
+          </StackPanel>
+
+          <StackPanel Grid.Row="1" Grid.Column="0" x:Name="BoxAccount" Margin="0,0,10,10">
+            <TextBlock x:Name="LblAccount" Text="入账账户 *" Style="{StaticResource T.Label}"/>
+            <ComboBox x:Name="CmbAccount" DisplayMemberPath="Name" SelectedValuePath="Id"/>
+          </StackPanel>
+          <StackPanel Grid.Row="1" Grid.Column="1" x:Name="BoxToAccount" Margin="0,0,0,10">
+            <TextBlock Text="转入账户 *" Style="{StaticResource T.Label}"/>
+            <ComboBox x:Name="CmbToAccount" DisplayMemberPath="Name" SelectedValuePath="Id"/>
+          </StackPanel>
+
+          <StackPanel Grid.Row="2" Grid.Column="0" x:Name="BoxPartner" Margin="0,0,10,10">
+            <TextBlock x:Name="LblPartner" Text="往来单位" Style="{StaticResource T.Label}"/>
+            <ComboBox x:Name="CmbPartner" DisplayMemberPath="Name" SelectedValuePath="Id"/>
+          </StackPanel>
+          <StackPanel Grid.Row="2" Grid.Column="1" x:Name="BoxProject" Margin="0,0,0,10">
+            <TextBlock Text="项目" Style="{StaticResource T.Label}"/>
+            <ComboBox x:Name="CmbProject" DisplayMemberPath="Name" SelectedValuePath="Id"/>
+          </StackPanel>
+
+          <StackPanel Grid.Row="3" Grid.Column="0" x:Name="BoxDept" Margin="0,0,10,10">
+            <TextBlock Text="部门" Style="{StaticResource T.Label}"/>
+            <ComboBox x:Name="CmbDept" DisplayMemberPath="Name" SelectedValuePath="Id"/>
+          </StackPanel>
+          <StackPanel Grid.Row="3" Grid.Column="1" x:Name="BoxHandler" Margin="0,0,0,10">
+            <TextBlock Text="经办人" Style="{StaticResource T.Label}"/>
+            <ComboBox x:Name="CmbHandler" DisplayMemberPath="Name" SelectedValuePath="Name"/>
+          </StackPanel>
+
+          <StackPanel Grid.Row="4" Grid.Column="0" x:Name="BoxSubject" Margin="0,0,10,10">
+            <TextBlock Text="科目" Style="{StaticResource T.Label}"/>
+            <ComboBox x:Name="CmbSubject" DisplayMemberPath="Name" SelectedValuePath="Id"/>
+          </StackPanel>
+          <StackPanel Grid.Row="4" Grid.Column="1" x:Name="BoxFee" Margin="0,0,0,10">
+            <TextBlock Text="转账手续费（自动生成支出单）" Style="{StaticResource T.Label}"/>
+            <TextBox x:Name="TxtFee" Height="30"/>
+          </StackPanel>
+        </Grid>
+
+        <StackPanel Margin="0,0,0,10">
+          <TextBlock Text="摘要 *" Style="{StaticResource T.Label}"/>
+          <TextBox x:Name="TxtSummary" Height="30" MaxLength="200" TextChanged="TxtSummary_TextChanged"/>
+          <TextBlock x:Name="SummaryCount" Text="0 / 200" Style="{StaticResource T.Hint}" HorizontalAlignment="Right"/>
+        </StackPanel>
+
+        <StackPanel Margin="0,0,0,10">
+          <TextBlock Text="备注" Style="{StaticResource T.Label}"/>
+          <TextBox x:Name="TxtNote" Height="52" TextWrapping="Wrap" AcceptsReturn="True" MaxLength="500"
+                   VerticalContentAlignment="Top" Padding="8,6"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" x:Name="Flags">
+          <CheckBox x:Name="ChkRevenue" Content="计入项目收入发生额" Margin="0,0,18,0" VerticalAlignment="Center"/>
+          <CheckBox x:Name="ChkCost" Content="计入项目成本发生额" Margin="0,0,18,0" VerticalAlignment="Center"/>
+          <CheckBox x:Name="ChkInvoiceable" Content="可开票业务" IsChecked="True" VerticalAlignment="Center"/>
+        </StackPanel>
+      </StackPanel>
+    </Border>
+
+    <!-- 提示 -->
+    <TextBlock Grid.Row="1" x:Name="HintText" Style="{StaticResource T.Hint}" Margin="4,10,0,0" TextWrapping="Wrap"
+               Text="带 * 为必填项。保存后状态为待审核，审核后才计入正式账务与报表。"/>
+
+    <!-- 底部按钮 -->
+    <Border Grid.Row="2" Style="{StaticResource Card}" Padding="14,10" Margin="0,10,0,0">
+      <Grid>
+        <StackPanel Orientation="Horizontal">
+          <Button x:Name="BtnDelete" Content="删除单据" Style="{StaticResource Btn.Danger}" Click="Delete_Click" Visibility="Collapsed"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+          <Button Content="取消" Width="84" Click="Cancel_Click" Margin="0,0,8,0"/>
+          <Button Content="保存为草稿" Width="100" Click="SaveDraft_Click" Margin="0,0,8,0"/>
+          <Button Content="保存并提交" Width="104" Style="{StaticResource Btn.Primary}" Click="Save_Click" IsDefault="True"/>
+        </StackPanel>
+      </Grid>
+    </Border>
+  </Grid>
+</Window>

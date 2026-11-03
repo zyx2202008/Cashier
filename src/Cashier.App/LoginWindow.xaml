@@ -1,0 +1,42 @@
+<Window x:Class="Cashier.App.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="出纳管理 · 登录" Height="470" Width="430"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Background="{StaticResource B.Bg}" ShowInTaskbar="True">
+  <Border Margin="0" Background="{StaticResource B.Bg}">
+    <Grid Margin="28,26">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+
+      <StackPanel Grid.Row="0" Orientation="Horizontal">
+        <Border Width="34" Height="34" CornerRadius="8" Background="{StaticResource B.Brand}" VerticalAlignment="Center">
+          <TextBlock Text="¥" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+        <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
+          <TextBlock Text="出纳管理" Style="{StaticResource T.H1}"/>
+          <TextBlock x:Name="BookName" Text="本地单机版" Style="{StaticResource T.Hint}"/>
+        </StackPanel>
+      </StackPanel>
+
+      <Border Grid.Row="1" Style="{StaticResource Card}" Margin="0,20,0,0" Padding="20">
+        <StackPanel>
+          <TextBlock Text="登录名" Style="{StaticResource T.Label}"/>
+          <TextBox x:Name="TxtUser" Height="32" Text="admin"/>
+          <TextBlock Text="密码" Style="{StaticResource T.Label}" Margin="0,12,0,3"/>
+          <PasswordBox x:Name="TxtPwd" Height="32" KeyDown="TxtPwd_KeyDown"/>
+          <TextBlock x:Name="ErrText" Foreground="{StaticResource B.Danger}" FontSize="11.5" Margin="0,10,0,0"
+                     TextWrapping="Wrap" Visibility="Collapsed"/>
+          <Button x:Name="BtnLogin" Content="登 录" Style="{StaticResource Btn.Primary}" Height="34" Margin="0,16,0,0"
+                  Click="BtnLogin_Click" IsDefault="True"/>
+          <TextBlock x:Name="DataHint" Style="{StaticResource T.Hint}" Margin="0,12,0,0" TextWrapping="Wrap" MaxWidth="330"/>
+        </StackPanel>
+      </Border>
+
+      <TextBlock Grid.Row="2" x:Name="Foot" Style="{StaticResource T.Hint}" TextWrapping="Wrap" Margin="0,14,0,0" VerticalAlignment="Top"/>
+    </Grid>
+  </Border>
+</Window>

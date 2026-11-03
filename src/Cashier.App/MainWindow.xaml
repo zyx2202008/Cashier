@@ -1,0 +1,119 @@
+<Window x:Class="Cashier.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="出纳管理" Height="820" Width="1400" MinHeight="640" MinWidth="1080"
+        WindowStartupLocation="CenterScreen" Background="{StaticResource B.Bg}"
+        FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="208"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+
+    <!-- 左侧导航 -->
+    <Border Grid.Column="0" Background="White" BorderBrush="{StaticResource B.Line}" BorderThickness="0,0,1,0">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Padding="14,14,12,12" BorderBrush="{StaticResource B.LineSoft}" BorderThickness="0,0,0,1">
+          <StackPanel Orientation="Horizontal">
+            <Border Width="30" Height="30" CornerRadius="7" Background="{StaticResource B.BrandSoft}">
+              <TextBlock Text="¥" Foreground="{StaticResource B.Brand}" FontSize="15" FontWeight="Bold"
+                         HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <StackPanel Margin="9,0,0,0" VerticalAlignment="Center">
+              <TextBlock x:Name="NavBook" Text="账套" FontWeight="SemiBold" FontSize="12.5" TextTrimming="CharacterEllipsis"/>
+              <TextBlock x:Name="NavMeta" Text="单机版" Style="{StaticResource T.Hint}"/>
+            </StackPanel>
+          </StackPanel>
+        </Border>
+
+        <ListBox Grid.Row="1" x:Name="Nav" Style="{StaticResource NavList}" ItemContainerStyle="{StaticResource NavItem}"
+                 SelectionChanged="Nav_SelectionChanged" Padding="8,6,8,8" ScrollViewer.CanContentScroll="False">
+          <ListBox.GroupStyle>
+            <GroupStyle>
+              <GroupStyle.ContainerStyle>
+                <Style TargetType="GroupItem">
+                  <Setter Property="Template">
+                    <Setter.Value>
+                      <ControlTemplate TargetType="GroupItem">
+                        <Expander Header="{Binding Name}" IsExpanded="False" Style="{StaticResource NavGroup}"
+                                  AutomationProperties.Name="{Binding Name}">
+                          <ItemsPresenter/>
+                        </Expander>
+                      </ControlTemplate>
+                    </Setter.Value>
+                  </Setter>
+                </Style>
+              </GroupStyle.ContainerStyle>
+            </GroupStyle>
+          </ListBox.GroupStyle>
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding Title}" TextTrimming="CharacterEllipsis"/>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Border Grid.Row="2" Padding="10,8" BorderBrush="{StaticResource B.LineSoft}" BorderThickness="0,1,0,0">
+          <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="2,0,0,6">
+              <Border Width="24" Height="24" CornerRadius="12" Background="{StaticResource B.BrandSoft}">
+                <TextBlock x:Name="UserInitial" Text="李" Foreground="{StaticResource B.BrandDark}" FontSize="11"
+                           FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+              </Border>
+              <StackPanel Margin="8,0,0,0" VerticalAlignment="Center">
+                <TextBlock x:Name="UserName" Text="用户" FontSize="12"/>
+                <TextBlock x:Name="UserRole" Text="出纳" Style="{StaticResource T.Hint}"/>
+              </StackPanel>
+            </StackPanel>
+            <UniformGrid Columns="2">
+              <Button Content="数据目录" Style="{StaticResource Btn.Sm}" Click="OpenDataDir_Click" Margin="0,0,3,0"/>
+              <Button Content="退出登录" Style="{StaticResource Btn.Sm}" Click="Logout_Click" Margin="3,0,0,0"/>
+            </UniformGrid>
+          </StackPanel>
+        </Border>
+      </Grid>
+    </Border>
+
+    <!-- 右侧主区 -->
+    <Grid Grid.Column="1">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" MinHeight="62"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="26"/>
+      </Grid.RowDefinitions>
+
+      <Border Grid.Row="0" Background="White" BorderBrush="{StaticResource B.Line}" BorderThickness="0,0,0,1">
+        <Grid Margin="16,6">
+          <Grid.ColumnDefinitions><ColumnDefinition Width="2*"/><ColumnDefinition Width="3*"/></Grid.ColumnDefinitions>
+          <StackPanel VerticalAlignment="Center" Margin="0,0,12,0">
+            <StackPanel Orientation="Horizontal">
+              <TextBlock x:Name="PageTitle" Text="收支明细" Style="{StaticResource T.H1}"/>
+              <Border x:Name="PageChip" Style="{StaticResource Chip}" Margin="8,0,0,0" Visibility="Collapsed">
+                <TextBlock x:Name="PageChipText" Text="" FontSize="11" Foreground="{StaticResource B.Ink2}"/>
+              </Border>
+            </StackPanel>
+            <TextBlock x:Name="PageSubtitle" Text="" Style="{StaticResource T.Hint}" TextTrimming="CharacterEllipsis" Margin="0,1,0,0"/>
+          </StackPanel>
+          <WrapPanel Grid.Column="1" x:Name="PageActions" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        </Grid>
+      </Border>
+
+      <ContentControl Grid.Row="1" x:Name="PageHost" Margin="0"/>
+
+      <Border Grid.Row="2" Background="White" BorderBrush="{StaticResource B.Line}" BorderThickness="0,1,0,0">
+        <Grid Margin="12,0">
+          <Grid.ColumnDefinitions><ColumnDefinition Width="2*"/><ColumnDefinition Width="3*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+          <TextBlock x:Name="StatusText" VerticalAlignment="Center" Style="{StaticResource T.Hint}" TextTrimming="CharacterEllipsis"/>
+          <TextBlock Grid.Column="1" x:Name="StatusDb" Style="{StaticResource T.Hint}" Margin="12,0" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}"/>
+          <TextBlock Grid.Column="2" x:Name="StatusPeriod" Style="{StaticResource T.Hint}" VerticalAlignment="Center"/>
+        </Grid>
+      </Border>
+    </Grid>
+  </Grid>
+</Window>

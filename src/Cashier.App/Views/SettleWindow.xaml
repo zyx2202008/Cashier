@@ -1,0 +1,64 @@
+<Window x:Class="Cashier.App.Views.SettleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="核销" Width="900" Height="680" WindowStartupLocation="CenterOwner"
+        Background="{StaticResource B.Bg}" FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI">
+  <Grid Margin="14">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <Border Grid.Row="0" Style="{StaticResource Card}" Padding="14,10">
+      <StackPanel>
+        <StackPanel Orientation="Horizontal">
+          <TextBlock x:Name="TitleText" Text="核销" Style="{StaticResource T.H1}"/>
+          <Border Style="{StaticResource Chip}" Margin="10,0,0,0">
+            <TextBlock x:Name="KindText" Text="" FontSize="11" Foreground="{StaticResource B.Ink2}"/>
+          </Border>
+        </StackPanel>
+        <TextBlock x:Name="SummaryText" Style="{StaticResource T.Muted}" Margin="0,4,0,0"/>
+      </StackPanel>
+    </Border>
+
+    <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="2,10,0,6">
+      <TextBlock x:Name="SourceListTitle" Text="可用的收付款单据（勾选后分配）" Style="{StaticResource T.Muted}" VerticalAlignment="Center"/>
+      <TextBlock x:Name="LeftText" Style="{StaticResource T.Hint}" Margin="10,0,0,0" VerticalAlignment="Center"/>
+    </StackPanel>
+
+    <Border Grid.Row="2" Style="{StaticResource Card}" ClipToBounds="True">
+      <DataGrid x:Name="GridBiz" IsReadOnly="True" SelectionMode="Extended"/>
+    </Border>
+
+    <Border Grid.Row="3" Style="{StaticResource Card}" Padding="12,10" Margin="0,10,0,0">
+      <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+        <TextBlock Text="本次分配金额" Style="{StaticResource T.Label}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+        <TextBox x:Name="TxtAmount" Width="140" Height="30"/>
+        <Button Content="分配到选中单据" Style="{StaticResource Btn.Primary}" Margin="10,0,0,0" Click="Allocate_Click"/>
+        <Button Content="按日期先后自动分配" Margin="8,0,0,0" Click="Auto_Click"/>
+        <Button Content="平均分配到选中" Margin="8,0,0,0" Click="Split_Click"/>
+        <TextBlock x:Name="TipText" Style="{StaticResource T.Hint}" VerticalAlignment="Center" Margin="12,0,0,0"/>
+      </StackPanel>
+    </Border>
+
+    <Grid Grid.Row="4" Margin="0,10,0,0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
+      </Grid.ColumnDefinitions>
+      <StackPanel Grid.Column="0">
+        <TextBlock Text="已核销明细" Style="{StaticResource T.Muted}" Margin="2,0,0,6"/>
+        <Border Style="{StaticResource Card}" Height="150" ClipToBounds="True">
+          <DataGrid x:Name="GridAlloc" IsReadOnly="True"/>
+        </Border>
+      </StackPanel>
+      <StackPanel Grid.Column="1" VerticalAlignment="Bottom" Margin="10,0,0,8">
+        <Button Content="取消选中核销" Style="{StaticResource Btn.Danger}" Width="110" Click="Unallocate_Click"/>
+        <Button Content="关闭" Width="110" Margin="0,8,0,0" Click="Close_Click"/>
+      </StackPanel>
+    </Grid>
+  </Grid>
+</Window>
